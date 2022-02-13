@@ -10,7 +10,7 @@ public class Questao4 {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Eu sei dividir");
         System.out.println("Informe o primeiro valor");
-        double x = teclado.nextInt();
+        int x = teclado.nextInt();
         Integer y = null;
 
         while (y == null) {
@@ -25,7 +25,7 @@ public class Questao4 {
                 System.out.println(e.getMessage());
             }
         }
-        double r = x/y;
+        double r = (double) x / y;
         System.out.println("Resultado da divisão: " + r);
     }
 }
