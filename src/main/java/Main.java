@@ -6,6 +6,8 @@ public class Main {
         agencia.adiciona(new ContaPoupanca());
         agencia.adiciona(new ContaPoupanca());
         agencia.adiciona(new ContaPoupanca());
+        agencia.adiciona(new ContaCorrente());
+        agencia.adiciona(new ContaCorrente());
 
         System.out.println(agencia.getQuantidadeContas());
     }
