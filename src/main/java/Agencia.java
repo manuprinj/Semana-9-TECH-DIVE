@@ -1,3 +1,5 @@
+import static utils.EntradaUtils.getString;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,5 +14,14 @@ public class Agencia {
 
     public int getQuantidadeContas() {
         return contas.size();
+    }
+
+    public Conta buscaPorTitular(String nomeDoTitular) {
+        for (Conta conta : contas) {
+            if (conta.getCliente().getNome().equals(nomeDoTitular)) {
+                System.out.println(conta);
+            }
+        }
+        return null;
     }
 }
