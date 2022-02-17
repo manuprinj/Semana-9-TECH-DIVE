@@ -47,11 +47,18 @@ public class Main {
     public static void cadastroReserva() {
         Hospede hospede = getHospede();
         if (hospede != null) {
-            LocalDate dataReserva = getData("Digite a data da reserva: ");
-            if (dataReserva.isBefore(LocalDate.now())) {
-                System.out.println("Data inválida!!");
-            } else {
-                hospede.getReservas().add(new Reserva(getQuarto(), dataReserva));
+            try {
+                Quarto quarto = getQuarto();
+                LocalDate inicioReserva = getData("Digite a data inicial da reserva: ");
+                if (inicioReserva.isBefore(LocalDate.now())) throw new IllegalArgumentException("Essa data já passou!!");
+                if (inicioReserva.isAfter(LocalDate.now().plusDays(60))) throw new IllegalArgumentException("Só pode reservar com 60 dias de antecedência!!");
+
+                LocalDate fimReserva = getData("Digite a data final da reserva: ");
+                if (fimReserva.isBefore(inicioReserva)) throw new IllegalArgumentException("O fim não pode ser antes do início!!");
+
+                hospede.getReservas().add(new Reserva(quarto, inicioReserva, fimReserva));
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -62,7 +69,7 @@ public class Main {
             System.out.println("Selecione a reserva para cancelar: ");
             for (int i = 0; i < hospede.getReservas().size(); i++) {
                 Reserva reserva = hospede.getReservas().get(i);
-                System.out.println(i + 1 + " - " + reserva.getData() + " ");
+                System.out.println(i + 1 + " - " + reserva + " ");
             }
             int indexReserva = getInt() - 1;
             hospede.getReservas().remove(indexReserva);
@@ -82,6 +89,14 @@ public class Main {
         Hospede hospede = getHospede();
         if (hospede != null) {
             System.out.println(hospede);
+            if (hospede.getReservas().isEmpty()) {
+                System.out.println("Sem reservas!!");
+            } else {
+                System.out.println("Reservas:");
+                for (Reserva reserva : hospede.getReservas()) {
+                    System.out.println(reserva);
+                }
+            }
         }
     }
 
@@ -100,7 +115,7 @@ public class Main {
         LocalDate dataReserva = getData("Digite a data da reserva: ");
         for (Hospede hospede : hospedes) {
             for (Reserva reserva : hospede.getReservas()) {
-                if (reserva.getData().equals(dataReserva)) {
+                if (!reserva.getInicio().isAfter(dataReserva) && !reserva.getFim().isBefore(dataReserva)) {
                     System.out.println(hospede);
                     System.out.println(reserva);
                 }

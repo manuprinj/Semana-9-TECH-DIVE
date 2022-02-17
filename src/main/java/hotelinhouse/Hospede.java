@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import utils.ValidacaoCPF;
+
 
 public class Hospede {
 
@@ -24,7 +26,7 @@ public class Hospede {
     @Override
     public String toString () {
         StringJoiner joiner = new StringJoiner(" | ")
-                .add("CPF: " + getCpfHospede())
+                .add("CPF: " + ValidacaoCPF.getMascaraCPF(getCpfHospede()))
                 .add("Data de Nascimento: " + getDataNascimento());
         return joiner.toString();
     }
