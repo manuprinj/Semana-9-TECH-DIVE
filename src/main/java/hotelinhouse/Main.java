@@ -56,7 +56,15 @@ public class Main {
                 LocalDate fimReserva = getData("Digite a data final da reserva: ");
                 if (fimReserva.isBefore(inicioReserva)) throw new IllegalArgumentException("O fim não pode ser antes do início!!");
 
-                hospede.getReservas().add(new Reserva(quarto, inicioReserva, fimReserva));
+                List<String> cpfDependentes = new ArrayList<>();
+                cpfDependentes.add(hospede.getCpfHospede());
+
+                System.out.println("Quantas pessoas ficarão no quarto?");
+                int pessoas = getInt();
+                for (int i = 1; i < pessoas; i++) {
+                    cpfDependentes.add(getCPF("Digite o CPF do hospede " + (i + 1) + ": "));
+                }
+                hospede.getReservas().add(new Reserva(quarto, inicioReserva, fimReserva, cpfDependentes));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

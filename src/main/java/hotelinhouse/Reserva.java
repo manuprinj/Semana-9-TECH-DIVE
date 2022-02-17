@@ -3,6 +3,7 @@ package hotelinhouse;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.StringJoiner;
 
 
@@ -11,11 +12,13 @@ public class Reserva {
     private Quarto quarto;
     private LocalDate inicio;
     private LocalDate fim;
+    private List<String> cpfDependentes;
 
-    public Reserva(Quarto quarto, LocalDate inicio, LocalDate fim) {
+    public Reserva(Quarto quarto, LocalDate inicio, LocalDate fim, List<String> cpfDependentes) {
         this.quarto = quarto;
         this.inicio = inicio;
         this.fim = fim;
+        this.cpfDependentes = cpfDependentes;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class Reserva {
                 .add("Data: " + inicio + " - " + fim)
                 .add(getTemporada().getNome())
                 .add("Valor: R$ " + getValor() + ",00")
+                .add("Pessoas: " + String.join(", ", cpfDependentes))
                 .toString();
     }
 
@@ -58,5 +62,13 @@ public class Reserva {
 
     public void setFim(LocalDate fim) {
         this.fim = fim;
+    }
+
+    public List<String> getCpfDependentes() {
+        return cpfDependentes;
+    }
+
+    public void setCpfDependentes(List<String> cpfDependentes) {
+        this.cpfDependentes = cpfDependentes;
     }
 }

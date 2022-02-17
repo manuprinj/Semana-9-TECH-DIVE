@@ -1,8 +1,6 @@
 package hotelinhouse;
 
 
-import static utils.EntradaUtils.getCPF;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
