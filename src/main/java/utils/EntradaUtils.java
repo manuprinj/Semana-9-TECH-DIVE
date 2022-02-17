@@ -1,6 +1,8 @@
 package utils;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
@@ -40,5 +42,25 @@ public class EntradaUtils {
             valor = SC.nextLine();
         }
         return valor;
+    }
+
+    public static String getCPF(String mensagem) {
+        String cpf = "";
+        while (!ValidacaoCPF.isCPFValido(cpf)) {
+            System.out.println(mensagem);
+            cpf = SC.nextLine();
+        }
+        return cpf;
+    }
+
+    public static LocalDate getData(String mensagem) {
+        while (true) {
+            System.out.println(mensagem);
+            try {
+                return DataUtils.parse(SC.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("Data inválida, digite a data no formato dd/MM/yyyy");
+            }
+        }
     }
 }
