@@ -4,7 +4,8 @@ package hotelinhouse;
 public enum Quarto {
 
     SIMPLES("Simples", 90, 140),
-    LUXO("Luxo", 150, 400);
+    LUXO("Luxo", 150, 400),
+    SUITE_SUPREMA("Suíte Suprema", 500, 800);
 
     private final String nome;
     private final int valorBaixaTemporada;
